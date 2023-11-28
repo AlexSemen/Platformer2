@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private Transform _groundCheck;
+    [SerializeField] private LayerMask _whatIsGround;
 
     private bool isFacingRight = true;
     public bool _isGrounded;
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        _isGrounded = Physics2D.OverlapCircle(groundCheck.position, _groundRadius, whatIsGround);
+        _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _groundRadius, _whatIsGround);
 
         move = Input.GetAxis("Horizontal");
 
