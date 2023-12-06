@@ -95,7 +95,7 @@ public class Samurai : MonoBehaviour
         }
     }
 
-    public void Death()
+    public void TakeDamage()
     {
         Debug.Log("Смерть");
     }
