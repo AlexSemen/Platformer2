@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEditor.UIElements;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
+using DG.Tweening;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -16,18 +18,46 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private bool _isAttack;
+    [SerializeField] private int _hitPoint;
+    [SerializeField] private int _hitPointMax;
 
     private bool isFacingRight = true;
     public bool _isGrounded;
     private float _groundRadius = 0.2f;
     private float _move;
+    private float _timeImmortality;
+    private WaitForSeconds _waitForImmortality;
+    private float _timeBlinkColorDamage;
+    private int _quantityBlinkColorDamage;
+    [SerializeField] private bool _immortality;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private PlayerMove _playerMove;
     private PlayerAttack _playerAttack;
+    
+    public bool IsWounded 
+    { 
+        get 
+        {
+            if (_hitPoint < _hitPointMax)
+            {
+                return true; 
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
 
     private void Awake()
     {
+        _hitPoint = _hitPointMax;
+        _timeBlinkColorDamage = 0.5f;
+        _quantityBlinkColorDamage = 6;
+        _immortality = false;
+        _timeImmortality = 3f;
+        _waitForImmortality = new WaitForSeconds(_timeImmortality);
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _playerMove = GetComponent<PlayerMove>();
@@ -75,8 +105,29 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
-        Debug.Log("Удар");
+        if (_immortality == false)
+        {
+            _hitPoint -= damage;
+
+            _spriteRenderer.DOColor(Color.red, _timeBlinkColorDamage).SetLoops(_quantityBlinkColorDamage, LoopType.Yoyo);
+
+            StartCoroutine(Immortality());
+        }
+    }
+
+    public void Heal()
+    {
+        _hitPoint += 1;
+    }
+
+    private IEnumerator Immortality()
+    {
+        _immortality = true;
+
+        yield return _waitForImmortality;
+
+        _immortality = false;
     }
 }

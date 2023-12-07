@@ -389,6 +389,8 @@
 "Assets/Scripts/Enemy/HitBoxAttack.cs"
 "Assets/Scripts/Enemy/Samurai.cs"
 "Assets/Scripts/Enemy/TriggerChangeDirection.cs"
+"Assets/Scripts/Healer.cs"
+"Assets/Scripts/HealerSpawner.cs"
 "Assets/Scripts/Player/AnimatorPlayer.cs"
 "Assets/Scripts/Player/Bullet.cs"
 "Assets/Scripts/Player/Player.cs"

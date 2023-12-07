@@ -12,6 +12,7 @@ public class Samurai : MonoBehaviour
 {
     [SerializeField] private Transform _castPoint;
     [SerializeField] private bool _isAttack;
+    [SerializeField] private SpriteRenderer _samuraiDeath;
 
     private SpriteRenderer _spriteRenderer;
     private EnemyVision _enemyVision;
@@ -97,6 +98,10 @@ public class Samurai : MonoBehaviour
 
     public void TakeDamage()
     {
-        Debug.Log("Смерть");
+        SpriteRenderer samuraiDeath = Instantiate(_samuraiDeath, transform.position, Quaternion.identity);
+        samuraiDeath.flipX = _spriteRenderer.flipX;
+
+        Destroy(gameObject);
+
     }
 }
