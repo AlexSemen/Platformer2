@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Bullet _bullet;
 
     private Bullet _newBullet;
+
     public void ChangeDirection()
     {
         _spawnerBullets.localPosition = -_spawnerBullets.localPosition;

@@ -13,10 +13,5 @@ public class AnimatorPlayer : MonoBehaviour
     {
         public const string Attack = "Attack";
     }
-
-    public static class States
-    {
-        public const string Attack = "Attack";
-    }
 }
 

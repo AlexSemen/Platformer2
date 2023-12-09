@@ -12,11 +12,5 @@ public class AnimatorEnemy : MonoBehaviour
     public static class Triggers
     {
         public const string Attack = "Attack";
-        public const string Death = "Death";
     }
-
-    //public static class States
-    //{
-    //    public const string Attack = "Attack";
-    //}
 }

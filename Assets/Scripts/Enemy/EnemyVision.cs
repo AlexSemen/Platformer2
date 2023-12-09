@@ -14,7 +14,6 @@ public class EnemyVision : MonoBehaviour
     private Vector2 _endCastPoint;
     private Transform _castPoint;
 
-
     private void Awake()
     {
         _samurai = GetComponent<Samurai>();
@@ -30,7 +29,6 @@ public class EnemyVision : MonoBehaviour
 
         if(_hit.collider != null)
         {
-            //Debug.Log(_hit.collider.name);
             Debug.DrawLine(_castPoint.position, _hit.point, Color.red);
         }
         else

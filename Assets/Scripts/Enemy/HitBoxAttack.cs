@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HitBoxAttack : MonoBehaviour
 {
-    private Player player;
+    private Player _player;
     private int _damage;
 
     private void Awake()
@@ -14,9 +14,9 @@ public class HitBoxAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Player>(out Player player))
+        if (collision.TryGetComponent<Player>(out Player _player))
         {
-            player.TakeDamage(_damage);
+            _player.TakeDamage(_damage);
         }
     }
 }

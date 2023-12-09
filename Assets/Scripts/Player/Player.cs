@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     private WaitForSeconds _waitForImmortality;
     private float _timeBlinkColorDamage;
     private int _quantityBlinkColorDamage;
-    [SerializeField] private bool _immortality;
+    private bool _immortality;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private PlayerMove _playerMove;
@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _groundRadius, _groundMask);
 

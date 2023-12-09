@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Samurai))]
 public class EnemyMove : MonoBehaviour
 {
     [SerializeField] private float _speed;
@@ -14,7 +15,6 @@ public class EnemyMove : MonoBehaviour
     private Vector2 _endCastPoint;
     private Samurai _samurai;
     private Transform _castPoint;
-
 
     private void Awake()
     {
@@ -32,7 +32,6 @@ public class EnemyMove : MonoBehaviour
         
         if (_hit.collider == null)
         {
-          //Debug.DrawLine(_castPoint.position, _hit.point, Color.red);
           _rigidbody2D.velocity = new Vector2(_speed, _rigidbody2D.velocity.y);
         }
     }

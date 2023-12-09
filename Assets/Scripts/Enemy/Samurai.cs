@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyVision))]
 [RequireComponent(typeof(EnemyMove))]
 [RequireComponent(typeof(EnemyAttack))]
-[RequireComponent(typeof(Animator))]
 
 public class Samurai : MonoBehaviour
 {
@@ -18,7 +17,6 @@ public class Samurai : MonoBehaviour
     private EnemyVision _enemyVision;
     private EnemyMove _enemyMove;
     private EnemyAttack _enemyAttack;
-    private Animator _animator;
     private Player _player;
 
     public Transform CastPoint => _castPoint;
@@ -29,7 +27,6 @@ public class Samurai : MonoBehaviour
         _enemyVision = GetComponent<EnemyVision>();
         _enemyMove = GetComponent<EnemyMove>();
         _enemyAttack = GetComponent<EnemyAttack>();
-        _animator = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -78,11 +75,20 @@ public class Samurai : MonoBehaviour
         _player = player;
     }
     
+    public void TakeDamage()
+    {
+        SpriteRenderer samuraiDeath = Instantiate(_samuraiDeath, transform.position, Quaternion.identity);
+        samuraiDeath.flipX = _spriteRenderer.flipX;
+
+        Destroy(gameObject);
+
+    }
+
     private void LookPlayer()
     {
         if (_player.transform.position.x < transform.position.x)
         {
-            if(_spriteRenderer.flipX != false)
+            if (_spriteRenderer.flipX != false)
             {
                 ChangeDirection();
             }
@@ -94,14 +100,5 @@ public class Samurai : MonoBehaviour
                 ChangeDirection();
             }
         }
-    }
-
-    public void TakeDamage()
-    {
-        SpriteRenderer samuraiDeath = Instantiate(_samuraiDeath, transform.position, Quaternion.identity);
-        samuraiDeath.flipX = _spriteRenderer.flipX;
-
-        Destroy(gameObject);
-
     }
 }
